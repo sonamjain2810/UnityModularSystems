@@ -1,0 +1,12 @@
+{
+  "name": "com.rikhil.level-system",
+  "version": "1.0.0",
+  "displayName": "Level System",
+  "description": "Reusable event-driven level flow (complete/restart/load) for Unity games.",
+  "unity": "2021.3",
+  "author": {
+    "name": "Rikhil Jain",
+    "email": "your-email@example.com"
+  },
+  "dependencies": {}
+}

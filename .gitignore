@@ -1,0 +1,50 @@
+
+# === Unity ===
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+[Bb]ackup*/
+[Cc]rash[Rr]eports/
+[Aa]ssets/AddressableAssetsData/*/*.bin*
+[Aa]ssets/StreamingAssets/aa/*
+[Aa]rtifacts/
+
+# Visual Studio / JetBrains
+.vs/
+.idea/
+*.csproj
+*.sln
+*.user
+*.userprefs
+*.pidb
+*.svd
+*.pdb
+*.mdb
+*.opendb
+
+# Gradle / Android
+.gradle/
+*.apk
+*.aab
+
+# Xcode / iOS
+*.xcworkspace/
+*.xcuserstate
+*.xcuserdata/
+
+# Unity cache
+*.uni~
+*.tmp
+*.booproj
+
+# Logs
+*.log
+
+# DO NOT ignore .meta files
+!*.meta

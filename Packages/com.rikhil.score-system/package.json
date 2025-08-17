@@ -1,0 +1,12 @@
+{
+  "name": "com.rikhil.score-system",
+  "version": "1.0.0",
+  "displayName": "Score System",
+  "description": "Reusable SOAP-based score tracking system for Unity games.",
+  "unity": "2021.3",
+  "author": {
+    "name": "Rikhil Jain",
+    "email": "your-email@example.com"
+  },
+  "dependencies": {}
+}
