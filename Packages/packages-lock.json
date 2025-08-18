@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.rikhil.gamestate-system": {
+      "version": "file:com.rikhil.gamestate-system",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.rikhil.level-system": {
       "version": "file:com.rikhil.level-system",
       "depth": 0,

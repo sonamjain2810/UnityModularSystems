@@ -1,0 +1,11 @@
+{
+  "name": "com.rikhil.gamestate-system",
+  "version": "1.0.0",
+  "displayName": "Game State System",
+  "description": "Reusable SOAP-based GameState + Panel workflow",
+  "unity": "2021.3",
+  "author": {
+    "name": "Rikhil Jain"
+  },
+  "dependencies": {}
+}
