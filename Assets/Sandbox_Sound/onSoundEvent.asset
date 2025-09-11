@@ -9,19 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b7ca52a950d1494aa1184cdc7700c3d, type: 3}
-  m_Name: SoapSettings
+  m_Script: {fileID: 11500000, guid: 23107ce3dcdb043cda4c697ccf7c043c, type: 3}
+  m_Name: onSoundEvent
   m_EditorClassIdentifier: 
-  VariableDisplayMode: 0
-  NamingOnCreationMode: 0
-  CreatePathMode: 0
-  RaiseEventsInEditor: 1
-  Tags:
-  - None
-  Prefixes:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  TagIndex: 0
+  Description: 
+  _debugLogEnabled: 1
+  _debugValue: {fileID: 11400000, guid: 3c209cc6598ed4f13996d0c79e0aeadd, type: 2}
