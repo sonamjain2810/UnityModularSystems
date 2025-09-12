@@ -1,0 +1,87 @@
+﻿#include "pch-c.h"
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m2EB3686AA220BE28709F6118B3CA8BDFA7B09311 (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mF074C1ED1918B965A44A2F12D60848A123009850 (void);
+extern void InternetChecker_Awake_mEB94DA931C0F771DB18E08396470D7A483645137 (void);
+extern void InternetChecker_Start_mAF863204592581CFA0A29D685DB5F1C36A126686 (void);
+extern void InternetChecker__ctor_m7CCDB8C7DDFF4BDEF7D948AD2C7F67A73B994A20 (void);
+extern void U3CStartU3Ed__4__ctor_mA31645AABA2A45A3FE4AF4C5415AF00CA4E23882 (void);
+extern void U3CStartU3Ed__4_System_IDisposable_Dispose_m64FA4701059310F15FC26B37BF8F681E9C5BFFFC (void);
+extern void U3CStartU3Ed__4_MoveNext_m0046D53DDA9FE1EEAE7BBB69F45055A0133931F1 (void);
+extern void U3CStartU3Ed__4_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m2BFC98A1AB4C87DD03F82AA128EAE025D3DA49BA (void);
+extern void U3CStartU3Ed__4_System_Collections_IEnumerator_Reset_mC4608365A8FED68181FA3B40AC2AA634259211C7 (void);
+extern void U3CStartU3Ed__4_System_Collections_IEnumerator_get_Current_m0A0B1394F2D8958AB3801ED43F9C8DFA3BEF63D9 (void);
+extern void PanelController_Awake_m629D63EDA5F67031520D26BA7AB6714C51650A87 (void);
+extern void PanelController_OnDestroy_m60307E53C1B2F179CA9D75F88320F3D904EF07C1 (void);
+extern void PanelController_HandleStateChanged_mCBC4E382BB7889CFE9F9EED0945F458B2F68317E (void);
+extern void PanelController__ctor_mCD7A1A97E3F45538B18D0D2748ED83AC4017735E (void);
+extern void ScriptableEnumGameState__ctor_m24FEE7AD7761429B50BCDDC56D1BF5571EFDC765 (void);
+extern void ScriptableEventScriptableEnumGameState__ctor_mF724C2194A91B5ACE15D82588FFE93430603F152 (void);
+static Il2CppMethodPointer s_methodPointers[17] = 
+{
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m2EB3686AA220BE28709F6118B3CA8BDFA7B09311,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mF074C1ED1918B965A44A2F12D60848A123009850,
+	InternetChecker_Awake_mEB94DA931C0F771DB18E08396470D7A483645137,
+	InternetChecker_Start_mAF863204592581CFA0A29D685DB5F1C36A126686,
+	InternetChecker__ctor_m7CCDB8C7DDFF4BDEF7D948AD2C7F67A73B994A20,
+	U3CStartU3Ed__4__ctor_mA31645AABA2A45A3FE4AF4C5415AF00CA4E23882,
+	U3CStartU3Ed__4_System_IDisposable_Dispose_m64FA4701059310F15FC26B37BF8F681E9C5BFFFC,
+	U3CStartU3Ed__4_MoveNext_m0046D53DDA9FE1EEAE7BBB69F45055A0133931F1,
+	U3CStartU3Ed__4_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m2BFC98A1AB4C87DD03F82AA128EAE025D3DA49BA,
+	U3CStartU3Ed__4_System_Collections_IEnumerator_Reset_mC4608365A8FED68181FA3B40AC2AA634259211C7,
+	U3CStartU3Ed__4_System_Collections_IEnumerator_get_Current_m0A0B1394F2D8958AB3801ED43F9C8DFA3BEF63D9,
+	PanelController_Awake_m629D63EDA5F67031520D26BA7AB6714C51650A87,
+	PanelController_OnDestroy_m60307E53C1B2F179CA9D75F88320F3D904EF07C1,
+	PanelController_HandleStateChanged_mCBC4E382BB7889CFE9F9EED0945F458B2F68317E,
+	PanelController__ctor_mCD7A1A97E3F45538B18D0D2748ED83AC4017735E,
+	ScriptableEnumGameState__ctor_m24FEE7AD7761429B50BCDDC56D1BF5571EFDC765,
+	ScriptableEventScriptableEnumGameState__ctor_mF724C2194A91B5ACE15D82588FFE93430603F152,
+};
+static const int32_t s_InvokerIndices[17] = 
+{
+	9443,
+	6741,
+	6741,
+	6620,
+	6741,
+	5326,
+	6741,
+	6506,
+	6620,
+	6741,
+	6620,
+	6741,
+	6741,
+	5368,
+	6741,
+	6741,
+	6741,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_com_rikhil_gamestateU2Dsystem_CodeGenModule;
+const Il2CppCodeGenModule g_com_rikhil_gamestateU2Dsystem_CodeGenModule = 
+{
+	"com.rikhil.gamestate-system.dll",
+	17,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};

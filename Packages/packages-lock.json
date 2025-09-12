@@ -24,6 +24,12 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.rikhil.vibration-system": {
+      "version": "file:com.rikhil.vibration-system",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.multiplayer.center": {
       "version": "1.0.0",
       "depth": 0,
