@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac6aff619f994bc2966907fb84eeeb7, type: 3}
+  m_Name: AlphabetFadeAction
+  m_EditorClassIdentifier: 
+  duration: 2
+  ease: 4
+  killExistingTweens: 1
+  onCompleteEvent: {fileID: 11400000, guid: 487235e7958164dd9954673b10665b0c, type: 2}
+  from: 0
+  to: 1
+  blink: 1
+  blinkInterval: 0.6
+  setActiveOnPlay: 1
+  deactivateOnEnd: 0
+  loop: 0
+  loopCount: -1
+  loopType: 0

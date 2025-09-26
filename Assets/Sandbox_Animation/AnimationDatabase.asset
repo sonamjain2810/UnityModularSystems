@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e83648bcb4d349ec97cae431e322add, type: 3}
+  m_Name: AnimationDatabase
+  m_EditorClassIdentifier: 
+  entries:
+  - animationType: {fileID: 11400000, guid: 3e1c84b012dce4cd5a5258dfd1838018, type: 2}
+    action: {fileID: 11400000, guid: 0a515599a995446a6a4c1b146986a3ee, type: 2}
+  - animationType: {fileID: 11400000, guid: d40e292690b174c0994893309a9560f0, type: 2}
+    action: {fileID: 11400000, guid: 5780f54aa7f834c4eae2f604430fe2e1, type: 2}
+  - animationType: {fileID: 11400000, guid: 793bceb0f374a4cb09a8ca874715db7e, type: 2}
+    action: {fileID: 11400000, guid: 96f59668f5c9748f39c9da3c55f70200, type: 2}
+  - animationType: {fileID: 11400000, guid: b4e88eb6fe91a4f9db1624032a56f57d, type: 2}
+    action: {fileID: 11400000, guid: cfa841a14868345679fa3cb1d3c4421b, type: 2}

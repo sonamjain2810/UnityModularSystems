@@ -43,7 +43,7 @@ namespace Rikhil.SoundSystem
             // Play background music on start if assigned and enabled
             if (backgroundMusicType != null)
             {
-                HandlePlaySound(backgroundMusicType);
+                //HandlePlaySound(backgroundMusicType);
             }
         }
 
