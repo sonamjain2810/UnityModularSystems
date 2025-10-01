@@ -735,6 +735,7 @@ MonoBehaviour:
   animationType: {fileID: 11400000, guid: 793bceb0f374a4cb09a8ca874715db7e, type: 2}
   target: {fileID: 463375304}
   onPlayAnimation: {fileID: 11400000, guid: 50eac5ce5dd1d4ab8bd5253b44aa9043, type: 2}
+  playOnEnable: 1
 --- !u!1 &474513241
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,6 +888,7 @@ MonoBehaviour:
   animationType: {fileID: 11400000, guid: 793bceb0f374a4cb09a8ca874715db7e, type: 2}
   target: {fileID: 474513241}
   onPlayAnimation: {fileID: 11400000, guid: 50eac5ce5dd1d4ab8bd5253b44aa9043, type: 2}
+  playOnEnable: 1
 --- !u!1 &493577413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,7 +1157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6bbe4906dc194a28aa94317773d6359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPlayAnimation: {fileID: 11400000, guid: 50eac5ce5dd1d4ab8bd5253b44aa9043, type: 2}
   database: {fileID: 11400000, guid: 06ed8bab654784db49ccecd827891c14, type: 2}
 --- !u!4 &504208423
 Transform:
@@ -1474,6 +1475,8 @@ MonoBehaviour:
   onAllCorrectPlaced: {fileID: 11400000, guid: f924dd7719f4b479386bf3a9565ed784, type: 2}
   onPlaySound: {fileID: 11400000, guid: ff37eda5508dc49c28cf9eb962c853fb, type: 2}
   levelSoundType: {fileID: 11400000, guid: 618d8546fae5f450f9fd2e1e5b1cfa1e, type: 2}
+  spellingSoundType: {fileID: 11400000, guid: 9aeb185c90f7940c8b46568a448e854f, type: 2}
+  letterScaleAnimation: {fileID: 11400000, guid: 2d13367c6b8bb461796dee3a188e039c, type: 2}
 --- !u!4 &617789212
 Transform:
   m_ObjectHideFlags: 0
@@ -1539,9 +1542,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd995140c85114d07b69e26762e9bdc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationType: {fileID: 11400000, guid: 793bceb0f374a4cb09a8ca874715db7e, type: 2}
+  animationType: {fileID: 11400000, guid: b4e88eb6fe91a4f9db1624032a56f57d, type: 2}
   target: {fileID: 832320925}
   onPlayAnimation: {fileID: 11400000, guid: 50eac5ce5dd1d4ab8bd5253b44aa9043, type: 2}
+  playOnEnable: 1
 --- !u!114 &832320929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1801,7 +1805,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationType: {fileID: 11400000, guid: b4e88eb6fe91a4f9db1624032a56f57d, type: 2}
   target: {fileID: 835872682}
-  onPlayAnimation: {fileID: 11400000, guid: 50eac5ce5dd1d4ab8bd5253b44aa9043, type: 2}
+  onPlayAnimation: {fileID: 0}
+  playOnEnable: 1
 --- !u!1 &900381895
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,6 +2104,7 @@ MonoBehaviour:
   animationType: {fileID: 0}
   target: {fileID: 961320717}
   onPlayAnimation: {fileID: 0}
+  playOnEnable: 1
 --- !u!1 &996240481
 GameObject:
   m_ObjectHideFlags: 0
@@ -2189,7 +2195,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationType: {fileID: 11400000, guid: 3e1c84b012dce4cd5a5258dfd1838018, type: 2}
   target: {fileID: 996240481}
-  onPlayAnimation: {fileID: 11400000, guid: 50eac5ce5dd1d4ab8bd5253b44aa9043, type: 2}
+  onPlayAnimation: {fileID: 0}
+  playOnEnable: 1
 --- !u!1 &998630489
 GameObject:
   m_ObjectHideFlags: 0
@@ -3533,7 +3540,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationType: {fileID: 11400000, guid: 3e1c84b012dce4cd5a5258dfd1838018, type: 2}
   target: {fileID: 1586044236}
-  onPlayAnimation: {fileID: 11400000, guid: 50eac5ce5dd1d4ab8bd5253b44aa9043, type: 2}
+  onPlayAnimation: {fileID: 0}
+  playOnEnable: 1
 --- !u!114 &1586044239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4011,7 +4019,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationType: {fileID: 11400000, guid: d40e292690b174c0994893309a9560f0, type: 2}
   target: {fileID: 1673266576}
-  onPlayAnimation: {fileID: 11400000, guid: 50eac5ce5dd1d4ab8bd5253b44aa9043, type: 2}
+  onPlayAnimation: {fileID: 0}
+  playOnEnable: 1
 --- !u!1 &1801918765
 GameObject:
   m_ObjectHideFlags: 0

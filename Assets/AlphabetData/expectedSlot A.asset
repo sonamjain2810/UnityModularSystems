@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TagIndex: 0
   Description: 
-  slotColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  slotColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   expectedLetter: {fileID: 11400000, guid: 32de5213fcf304572b63dd9f0a3cd4ca, type: 2}
   soundType: {fileID: 11400000, guid: 4ce6fddca5adb4205b0dfb6406d42596, type: 2}

@@ -3,25 +3,21 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Obvious.Soap;
-using Rikhil.SoundSystem;    // for sound events
+using Rikhil.SoundSystem;
 using Rikhil.AnimationSystem;
 
-/// <summary>
-/// Represents a draggable alphabet letter.
-/// Handles UI visuals, dragging, and playing sound when picked.
-/// </summary>
 public class Alphabet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [Header("Alphabet Data (SOAP)")]
-    public ScriptableEnumAlphabet alpha;                 // Letter ScriptableEnum (character, color, sound)
-    [SerializeField] private ScriptableEventSoundType onPlaySound; // SOAP event to play sound
+    public ScriptableEnumAlphabet alpha;
+    [SerializeField] private ScriptableEventSoundType onPlaySound;
 
     [Header("UI References")]
-    [SerializeField] private Image targetImage;          // UI background image
-    [SerializeField] private TextMeshProUGUI characterText; // UI text for the letter
+    [SerializeField] private Image targetImage;
+    [SerializeField] private TextMeshProUGUI characterText;
 
     [Header("State Tracking")]
-    [SerializeField] private BoolVariable placedInSlot;  // Did we place in a slot?
+    [SerializeField] private BoolVariable placedInSlot;
 
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
@@ -33,6 +29,9 @@ public class Alphabet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Vector2 originalPosition;
     public Vector2 OriginalPosition => originalPosition;
 
+    // For LevelManager to animate
+    public GameObject RuntimeInstance => gameObject;
+
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -41,7 +40,12 @@ public class Alphabet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     void Start()
     {
-        // Display character and initial color
+        // Register with LevelManager
+        LevelManager manager = FindObjectOfType<LevelManager>();
+        if (manager != null)
+            manager.RegisterAlphabet(this);
+
+        // Display initial UI
         if (characterText != null)
             characterText.text = alpha.character;
 
@@ -51,17 +55,15 @@ public class Alphabet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        // Play letter sound on drag start
         if (onPlaySound != null && alpha.soundType != null)
             onPlaySound.Raise(alpha.soundType);
 
         originalParent = transform.parent;
         originalPosition = rectTransform.anchoredPosition;
 
-        transform.SetParent(transform.root);   // move to top layer
+        transform.SetParent(transform.root);
         canvasGroup.blocksRaycasts = false;
 
-        // track drag offset
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rectTransform,
             eventData.position,
@@ -72,7 +74,6 @@ public class Alphabet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnDrag(PointerEventData eventData)
     {
-        // follow mouse / touch
         Vector2 localPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             rectTransform.parent as RectTransform,
@@ -85,7 +86,6 @@ public class Alphabet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // if not placed correctly → reset position
         if (!placedInSlot.Value)
         {
             transform.SetParent(originalParent);
@@ -93,12 +93,9 @@ public class Alphabet : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
 
         canvasGroup.blocksRaycasts = true;
-        placedInSlot.Value = false; // reset for next drag
+        placedInSlot.Value = false;
     }
 
-    /// <summary>
-    /// Change letter color dynamically (e.g. feedback).
-    /// </summary>
     public void SetColor(Color newColor)
     {
         if (targetImage != null)

@@ -2,7 +2,6 @@ using UnityEngine;
 using DG.Tweening;
 using DGTweenLoopType = DG.Tweening.LoopType;
 
-
 namespace Rikhil.AnimationSystem
 {
     /// <summary>
@@ -10,6 +9,7 @@ namespace Rikhil.AnimationSystem
     /// - Scales a target GameObject from one value to another.
     /// - Can optionally activate/deactivate the GameObject.
     /// - Supports looping (Restart, Yoyo, Incremental).
+    /// - Has callback support for chaining animations.
     /// </summary>
     [CreateAssetMenu(menuName = "AnimationSystem/Scale Animation", fileName = "ScaleAnimation")]
     public class ScaleAnimationSO : AnimationActionSO
@@ -22,62 +22,61 @@ namespace Rikhil.AnimationSystem
         public Vector3 to = Vector3.one;
 
         [Header("Activation Options")]
-        [Tooltip("If true, ensures the GameObject is active before playing the animation.")]
         public bool setActiveOnPlay = true;
-
-        [Tooltip("If true, deactivates the GameObject once the animation finishes. Ignored if looping.")]
         public bool deactivateOnEnd = false;
 
         [Header("Loop Settings")]
-        [Tooltip("If true, the animation will loop based on Loop Count and Loop Type.")]
         public bool loop = false;
-
-        [Tooltip("How many times the animation should loop.\n-1 = infinite.")]
         public int loopCount = -1;
-
-        [Tooltip("The type of looping to use (Restart, Yoyo, Incremental).")]
-        public DG.Tweening.LoopType loopType = DG.Tweening.LoopType.Yoyo;
-
+        public DGTweenLoopType loopType = DGTweenLoopType.Yoyo;
 
         /// <summary>
-        /// Play the scaling animation on a target GameObject.
+        /// Play the scaling animation with an optional onComplete callback.
         /// </summary>
-        /// <param name="target">The GameObject to animate.</param>
-        public override void Play(GameObject target)
+        public void Play(GameObject target, System.Action onComplete = null)
         {
-            if (target == null) return;
+            if (target == null)
+            {
+                onComplete?.Invoke();
+                return;
+            }
 
-            // Kill any running tweens on this target before starting a new one
             KillTweens(target);
-
             var t = target.transform;
 
-            // Optionally activate the object before animating
             if (setActiveOnPlay) target.SetActive(true);
 
-            // Force starting scale
             t.localScale = from;
 
-            // Create scale tween
             var tween = t.DOScale(to, Duration).SetEase(ease);
 
-            // If looping enabled → repeat animation
             if (loop)
             {
-                tween.SetLoops(loopCount, loopType);
+                tween.SetLoops(loopCount, loopType)
+                     .OnComplete(() =>
+                     {
+                         // Even in looping case, invoke completion chain
+                         onComplete?.Invoke();
+                     });
             }
             else
             {
-                // When not looping → complete normally
                 tween.OnComplete(() =>
                 {
-                    // Optionally deactivate object after animation ends
                     if (deactivateOnEnd) target.SetActive(false);
 
-                    // Raise global onComplete event (if any listeners are connected)
                     RaiseOnComplete();
+                    onComplete?.Invoke(); // 🔗 Trigger next animation
                 });
             }
+        }
+
+        /// <summary>
+        /// Backward compatibility with base Play().
+        /// </summary>
+        public override void Play(GameObject target)
+        {
+            Play(target, null);
         }
     }
 }

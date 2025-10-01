@@ -106,3 +106,6 @@ MonoBehaviour:
   - soundType: {fileID: 11400000, guid: 938bda2bf91c14a0698da08cee95655a, type: 2}
     clip: {fileID: 8300000, guid: 2eb355db9c5cd4de29bd50a8ca5aef61, type: 3}
     loop: 0
+  - soundType: {fileID: 11400000, guid: 9aeb185c90f7940c8b46568a448e854f, type: 2}
+    clip: {fileID: 8300000, guid: b613177f05bef4d97bc5c2ae411e0c6b, type: 3}
+    loop: 0
