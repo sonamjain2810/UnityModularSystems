@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6ac56c91fc947bf8f9e56e7b0b6af2, type: 3}
+  m_Name: LevelData_CAB
+  m_EditorClassIdentifier: 
+  word: CAB
+  wordImage: {fileID: 21300000, guid: 6338b630033766946a85c13ef29446ac, type: 3}
+  letters:
+  - {fileID: 11400000, guid: 3811aa33bf89a4879b814442f72e307b, type: 2}
+  - {fileID: 11400000, guid: 5b40976a9da864f33816b25e544419e6, type: 2}
+  - {fileID: 11400000, guid: 32de5213fcf304572b63dd9f0a3cd4ca, type: 2}
+  slots:
+  - {fileID: 11400000, guid: 651c8b7092b0d4968bf01410bab70508, type: 2}
+  - {fileID: 11400000, guid: 8cce13460797f4edaae4f967e99a45c3, type: 2}
+  - {fileID: 11400000, guid: fc43b5aa452084fac8b8b56fa339eeab, type: 2}
+  hasBlank: 0
+  blankIndex: -1
+  modeType: {fileID: 11400000, guid: 4b9cd90458c6c45f0adb256733101c59, type: 2}
+  spellingSound: {fileID: 11400000, guid: 7fece968865924fd0a8720b02e53a241, type: 2}
+  completeSound: {fileID: 11400000, guid: 4ce6fddca5adb4205b0dfb6406d42596, type: 2}

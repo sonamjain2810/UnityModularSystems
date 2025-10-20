@@ -4,72 +4,155 @@ using Rikhil.SoundSystem;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using Rikhil.AnimationSystem;
+
 /// <summary>
-/// Tracks placed letters and animates them sequentially when the level is complete.
-/// Optimized: No runtime FindObjectsOfType! Alphabets register themselves on Start.
+/// Handles level progression, tracks placed letters, 
+/// triggers animations, sounds, and level completion.
+/// Works with LevelLoader & Alphabet scripts.
 /// </summary>
 public class LevelManager : MonoBehaviour
 {
-    [Header("Level Variables (SOAP)")]
+    [Header("Level Data (Runtime)")]
+    private LevelDataSO currentLevelData;
+
+    [Header("SOAP Variables")]
     [SerializeField] private ScriptableListAlphabetLetterList correctLettersList;
     [SerializeField] private IntVariable desiredSize;
-
-    [Header("UI")]
-    [SerializeField] private Button nextButton;
 
     [Header("Events (SOAP)")]
     [SerializeField] private ScriptableEventAlphabetLetter onCorrectLetterPlaced;
     [SerializeField] private ScriptableEventNoParam onAllCorrectPlaced;
+    [SerializeField] private ScriptableEventNoParam onNextLevel; // raised when Next button is clicked
 
-    [Header("Level Completion Sound")]
-    [SerializeField] private ScriptableEventSoundType onPlaySound;
-    [SerializeField] private ScriptableEnumSoundTypeRegistry levelSoundType;
-
-    [SerializeField]
-    private ScriptableEnumSoundTypeRegistry spellingSoundType;
+    [Header("UI")]
+    [SerializeField] private Button nextButton;
 
     [Header("Animation")]
     [SerializeField] private ScaleAnimationSO letterScaleAnimation;
 
-    private int currentLetterIndex = 0;
+    [Header("Sound System")]
+    [SerializeField] private ScriptableEventSoundType onPlaySound;
 
-    // ✅ All active alphabets for this level
+    // Runtime
     private readonly List<Alphabet> allAlphabets = new();
     private readonly List<Alphabet> placedAlphabets = new();
+    private int currentLetterIndex = 0;
 
-    private void Start()
+    private void Awake()
     {
         if (nextButton != null)
+        {
             nextButton.gameObject.SetActive(false);
+            nextButton.onClick.RemoveAllListeners();
+            nextButton.onClick.AddListener(HandleNextLevelButton);
+        }
     }
 
     private void OnEnable()
     {
-        onCorrectLetterPlaced.OnRaised += OnLetterPlaced;
-        onAllCorrectPlaced.OnRaised += ShowButton;
+        if (onCorrectLetterPlaced != null)
+            onCorrectLetterPlaced.OnRaised += OnLetterPlaced;
+
+        if (onAllCorrectPlaced != null)
+            onAllCorrectPlaced.OnRaised += ShowNextButton;
     }
 
     private void OnDisable()
     {
-        onCorrectLetterPlaced.OnRaised -= OnLetterPlaced;
-        onAllCorrectPlaced.OnRaised -= ShowButton;
+        if (onCorrectLetterPlaced != null)
+            onCorrectLetterPlaced.OnRaised -= OnLetterPlaced;
+
+        if (onAllCorrectPlaced != null)
+            onAllCorrectPlaced.OnRaised -= ShowNextButton;
     }
 
-    /// <summary>
-    /// Called by each Alphabet on Start to register itself.
-    /// </summary>
+    // ---------------------------
+    // INITIALIZATION
+    // ---------------------------
+
+    public void InitializeLevel(LevelDataSO levelData)
+    {
+        currentLevelData = levelData;
+        ResetProgress();
+
+        Debug.Log($"🟢 LevelManager initialized with: {levelData.word}");
+
+        // ✅ Clear old list just in case
+        correctLettersList.Clear();
+
+        // ✅ Auto-count prefilled letters (for FillInBlank mode)
+        if (levelData.hasBlank)
+        {
+            for (int i = 0; i < levelData.slots.Length; i++)
+            {
+                if (i != levelData.blankIndex && levelData.slots[i].expectedLetter != null)
+                {
+                    var letter = levelData.slots[i].expectedLetter;
+                    if (!correctLettersList.Contains(letter))
+                    {
+                        correctLettersList.Add(letter);
+
+                        // ✅ Make sure event triggers for each prefilled letter (so animation order works)
+                        onCorrectLetterPlaced?.Raise(letter);
+                    }
+                }
+            }
+        }
+    }
+
+    public void ResetProgress()
+    {
+        correctLettersList.Clear();
+        placedAlphabets.Clear();
+        currentLetterIndex = 0;
+
+        // Safely reset only active, valid alphabets
+        for (int i = allAlphabets.Count - 1; i >= 0; i--)
+        {
+            var alpha = allAlphabets[i];
+            if (alpha == null)
+            {
+                allAlphabets.RemoveAt(i); // cleanup destroyed entries
+                continue;
+            }
+
+            if (alpha.gameObject != null && alpha.gameObject.activeInHierarchy)
+            {
+                try
+                {
+                    alpha.ResetToOriginal();
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogWarning($"⚠️ Could not reset alphabet {alpha.name}: {ex.Message}");
+                }
+            }
+        }
+
+        if (nextButton != null)
+            nextButton.gameObject.SetActive(false);
+    }
+
+    // ---------------------------
+    // REGISTRATION
+    // ---------------------------
+
     public void RegisterAlphabet(Alphabet alphabet)
     {
         if (!allAlphabets.Contains(alphabet))
             allAlphabets.Add(alphabet);
     }
 
+    // ---------------------------
+    // GAMEPLAY PROGRESSION
+    // ---------------------------
+
     private void OnLetterPlaced(ScriptableEnumAlphabet letter)
     {
         if (!correctLettersList.Contains(letter))
             correctLettersList.Add(letter);
 
-        // Find alphabet instance that matches the placed letter
+        // Find alphabet instance matching this letter
         foreach (var alpha in allAlphabets)
         {
             if (alpha.alpha == letter && !placedAlphabets.Contains(alpha))
@@ -79,66 +162,80 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        Debug.Log($"Letter placed: {letter.character} | Progress: {correctLettersList.Count}/{desiredSize.Value}");
+        Debug.Log($"✅ Letter placed: {letter.character} | {correctLettersList.Count}/{desiredSize.Value}");
 
-        // When all slots are filled
+        // Check for completion
         if (correctLettersList.Count == desiredSize.Value)
         {
-            Debug.Log("🎉 All letters placed, starting animation sequence!");
-
-            // Sort by X position for consistent animation order
-            placedAlphabets.Sort((a, b) =>
-                a.transform.position.x.CompareTo(b.transform.position.x));
-
+            Debug.Log("🎉 All letters placed! Starting spelling animation.");
+            placedAlphabets.Sort((a, b) => a.transform.position.x.CompareTo(b.transform.position.x));
             AnimateLettersSequentially();
-        
-        
-        
         }
     }
 
-    private void ShowButton()
-    {
-        if (nextButton != null)
-            nextButton.gameObject.SetActive(true);
-    }
+    // ---------------------------
+    // ANIMATION SEQUENCE
+    // ---------------------------
 
     private void AnimateLettersSequentially()
     {
         if (placedAlphabets.Count == 0)
         {
-            Debug.LogWarning("No letters to animate!");
+            Debug.LogWarning("⚠️ No letters to animate!");
             return;
         }
 
         currentLetterIndex = 0;
         AnimateNextLetter();
-        
-        
     }
 
     private void AnimateNextLetter()
     {
         if (currentLetterIndex >= placedAlphabets.Count)
         {
-            Debug.Log("✅ All letter animations completed!");
-            onPlaySound?.Raise(spellingSoundType);
-            onPlaySound?.Raise(levelSoundType);
+            // ✅ All letters animated → play word sound
+            Debug.Log("🔊 Playing full word sound!");
+            if (onPlaySound != null && currentLevelData != null && currentLevelData.spellingSound != null)
+                onPlaySound.Raise(currentLevelData.spellingSound);
+
+            // Level complete sound
+            if (onPlaySound != null && currentLevelData.completeSound != null)
+                onPlaySound.Raise(currentLevelData.completeSound);
+
+            // Raise level completion event
             onAllCorrectPlaced?.Raise();
             return;
         }
 
-        Alphabet alphabet = placedAlphabets[currentLetterIndex];
+        Alphabet current = placedAlphabets[currentLetterIndex];
 
-        // Play the animation and chain the next one
-        letterScaleAnimation.Play(alphabet.RuntimeInstance, () =>
+        // Play animation and sound sequentially
+        letterScaleAnimation.Play(current.RuntimeInstance, () =>
         {
-            onPlaySound?.Raise(alphabet.alpha.soundType);
-            Debug.Log($"Finished animating {alphabet.alpha.character}");
+            // Play letter-specific sound
+            if (onPlaySound != null && current.alpha.soundType != null)
+                onPlaySound.Raise(current.alpha.soundType);
+
+            Debug.Log($"Finished animating: {current.alpha.character}");
             currentLetterIndex++;
             AnimateNextLetter();
-            
         });
-       
+    }
+
+    // ---------------------------
+    // NEXT LEVEL HANDLING
+    // ---------------------------
+
+    private void ShowNextButton()
+    {
+        if (nextButton != null)
+            nextButton.gameObject.SetActive(true);
+    }
+
+    private void HandleNextLevelButton()
+    {
+        Debug.Log("➡️ Next button clicked!");
+        onNextLevel?.Raise(); // 🔥 Notify LevelLoader to load next level
+        ResetProgress();
     }
 }

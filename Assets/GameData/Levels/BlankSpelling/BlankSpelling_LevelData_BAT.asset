@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6ac56c91fc947bf8f9e56e7b0b6af2, type: 3}
+  m_Name: BlankSpelling_LevelData_BAT
+  m_EditorClassIdentifier: 
+  word: BAT
+  wordImage: {fileID: 21300000, guid: 6983f9dd33c7c694294a6bf3602318b7, type: 3}
+  letters:
+  - {fileID: 11400000, guid: 3811aa33bf89a4879b814442f72e307b, type: 2}
+  - {fileID: 11400000, guid: 2d53d49e085674d39b74a4c5173e234c, type: 2}
+  - {fileID: 11400000, guid: 32de5213fcf304572b63dd9f0a3cd4ca, type: 2}
+  slots:
+  - {fileID: 11400000, guid: fc43b5aa452084fac8b8b56fa339eeab, type: 2}
+  - {fileID: 11400000, guid: 8cce13460797f4edaae4f967e99a45c3, type: 2}
+  - {fileID: 11400000, guid: 9cd2172bec4fa4a25add26db614d94af, type: 2}
+  hasBlank: 0
+  blankIndex: -1
+  modeType: {fileID: 11400000, guid: 4b9cd90458c6c45f0adb256733101c59, type: 2}
+  spellingSound: {fileID: 11400000, guid: 3534fb9f77ec44b0c8bde036bbaedae7, type: 2}
+  completeSound: {fileID: 11400000, guid: 4ce6fddca5adb4205b0dfb6406d42596, type: 2}
